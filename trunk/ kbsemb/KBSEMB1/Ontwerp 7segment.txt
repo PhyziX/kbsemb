@@ -1,0 +1,43 @@
+void display(invoer)
+	DDR poort A en C waarde 1 geven
+	PIN3t/m5 (displayaansturing) van PORTC op 1 zetten, rest op 0.
+	zet a-g & DP in een array. a-g zijn afzonderlijke ledjes per display, DP is de decimale punt.
+	if(invoer > 999){
+		invoer = 0;
+	}
+	getal[3] = (invoer/1)%10
+	getal[2] = (invoer/10)%10
+	getal[1] = (invoer/100)%10
+	getal[0] = 0;
+	getal[] is een array met getal[1] = waarde display1, getal[2] = waarde display2, getal3 = waarde display3. Initiële waarde is 123. 0 is niets, gebruik van index 1,2,3 is overzichtelijker
+	int display_index
+
+	1 is rechter display, 2 is midden display, 3 is linker display
+
+	while(running){
+		if(keypressed){
+			if(getal[1] < 9){
+				getal[1]++
+			}
+			else{
+				getal[1] = 0
+				if(getal[2] < 9){
+					getal[2]++
+				}
+				else{
+					getal[2] = 0
+					if(getal[3] < 9){
+						getal[3]++
+					}
+					else{
+						getal[3] = 0
+					}
+				}
+			}
+		}
+		for(display_index = 1; display_index<= 3; display_index++){
+			zet PIN(display+2) van PORTC op 1, rest op 0 (display 1 = C3, display 2 = C4, display 3 = C5)
+			stuur getal[display_index] naar PORT[display_index]
+		}
+	}
+}
