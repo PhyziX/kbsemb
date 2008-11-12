@@ -1,0 +1,29 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.12</VERSION>
+ <DEVICE>AT90S4433</DEVICE>
+ <WORKING_DIR>C:\Documents and Settings\Asteroid\kbsp1\Opdr4</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\4433def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.map</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <RESET><FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.asm</FILE><LINE>18</LINE></RESET>
+  <schuif_licht><FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.asm</FILE><LINE>59</LINE></schuif_licht>
+  <forever><FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.asm</FILE><LINE>55</LINE></forever>
+  <increase><FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.asm</FILE><LINE>73</LINE></increase>
+  <decrease><FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.asm</FILE><LINE>80</LINE></decrease>
+  <return><FILE>C:\Documents and Settings\Asteroid\kbsp1\Opdr4\Opdr4.asm</FILE><LINE>87</LINE></return>
+ </LABELS>
+</ASSEMBLER_INFO>
