@@ -1,31 +1,34 @@
 Timers-c.o: ../Timers-c.c \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/io.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/sfr_defs.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/inttypes.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/stdint.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/iom128.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/portpins.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/common.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/version.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/fuse.h \
-  c:/winavr-20080610/lib/gcc/../../avr/include/avr/lock.h
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/io.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/sfr_defs.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/inttypes.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/stdint.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/iom16.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/portpins.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/common.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/version.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/fuse.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr/lock.h \
+  d:/winavr/winavr/lib/gcc/../../avr/include/avr\iom16.h
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/io.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/io.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/sfr_defs.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/sfr_defs.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/inttypes.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/inttypes.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/stdint.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/stdint.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/iom128.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/iom16.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/portpins.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/portpins.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/common.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/common.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/version.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/version.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/fuse.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/fuse.h:
 
-c:/winavr-20080610/lib/gcc/../../avr/include/avr/lock.h:
+d:/winavr/winavr/lib/gcc/../../avr/include/avr/lock.h:
+
+d:/winavr/winavr/lib/gcc/../../avr/include/avr\iom16.h:

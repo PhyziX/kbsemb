@@ -1,32 +1,43 @@
-#include <avr/io.h>
+#include   <avr/io.h>   //gcc
+#include <avr\iom16.h>
 
-int main (void)
-{
-	int i = 0;
-	DDRA = 255; // Set LED as output
-	DDRB = 255;
-	DDRC = 255;
-	DDRD = 0;
-	PORTC = 0x04;
-	
+#define outp(a, b) b = a
 
-	TCCR1B = 0x04; // Set up timer at Fcpu/64 
-
-	for (;;)
-	{
-		// Check timer value in if statement, true when count matches 1/20 of a second
-		if (TCNT1 >= 62500)
-		{
-			if(i == 1){
-				PORTA = 255;
-				i = 0;
-			}
-			else{
-				PORTA = 0;
-				i = 1;
-			}
-
-		 	TCNT1 = 0; // Reset timer value
-		}
+int main(void) {
+	pwm();
+	int i = 2;
+	int p = 4;
+	for(i = 0; i < 3; i++){
+		i = i + p;
 	}
-	} 
+	while(1){
+	}
+} 
+
+
+void pwm(){
+	/* set OC2 for PWM output*/
+
+	outp((1<<PINB3), DDRB);
+
+	/*set timer counter initial value*/
+
+	TCNT1=0x00;
+
+	/*Set timer output compare register*/
+
+	OCR1A=0x80;
+
+	/*start timer:
+
+	without presscaler
+
+	Non inverted mode in OC2 pin;
+
+	phase corect PWM*/
+	TCCR1A = 0xC9;
+	//outp((1<<FOC1A)|(1<<COM1A0)|(1<<COM1A0)|(1<<WGM10), TCCR1A);
+	TCCR1B = 0x01;
+	//outp((1<<CS10), TCCR1B);
+
+}
