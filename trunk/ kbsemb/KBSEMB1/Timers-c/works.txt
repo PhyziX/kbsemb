@@ -11,6 +11,7 @@ int i = 0;
 /* Initialize variables for interrupt */
 int main(void) {
 	/* cli();
+	
 	TCCR1A 	= 0x80;		// Compare ouput mode
 	TCCR1B 	= 0x01;		// Counter frequency
 	OCR1AH 	= 0x01;		// Compare register high
@@ -18,18 +19,11 @@ int main(void) {
 	TIMSK 	= 0x10;		// Set compare flag
 	TCNT1H 	= 0x00;		// Set high counter value to zero
 	TCNT1L 	= 0x00;		// Set low counter value to zero
-	sei(); */
-
-	cli();
-	TCCR2 = 0x22;
-	OCR2 = 0x08;
-	TIMSK = 0x80;
-	TCNT2 = 0x00;
 	sei();
 
 	forever(); 			// Goto an endless loop
-	
-	// for(;;){ motor1(0x8F,1); }
+	*/
+	for(;;){ motor1(0x8F,1); }
 
 } 
 
@@ -40,58 +34,48 @@ void forever(){
 }
 
 /* If an interrupt accures, execute this code */
-ISR(TIMER2_COMP_vect){
+ISR(TIMER1_COMPA_vect){
 	if(i == 0){
-		motor1(0xFF, 0);	// Start motor 1 motorX(speed,direction);
+		motor1(0x1F, 1);	// Start motor 1 motorX(speed,direction);
 		i = 1;
 	}else{
-		motor2(0xFF, 0);
+		motor2(0xFF, 1);
 		i = 0;
 	}
 	
-	TCNT2 = 0x00;		// Set counter value to zero		
+	
+	TCNT1H = 0x00;		// Set high counter value to zero		
+	TCNT1L = 0x00;		// Set low counter value to zero
 }
 
 
 void motor1(int speed, int direction){
-		OCR1AL = speed;
-		OCR1AH = 0; 
-		
-		if(direction == 1){
-			PORTD = 0x60;
-			DDRD = 0x60;
+		DDRD = 0x80;			// Set DDR bit (7 = OC2)
+		OCR2 = speed;   		// Load Pulse width - 175
+		if(direction == 1){		
+			PORTD = 0x60;		// forward, bit 5(pwm1) & 6
 		}else if(direction == -1){
-			PORTD = 0xA0;
-			DDRD = 0xA0;
+			PORTD = 0xA0;		// backward, bit 5(pwm1) & 7
 		}else{
-			PORTD = 0xE0;
-			DDRD = 0xE0;
-		} 
+			PORTD = 0xE0;		// brake, bit 5(pwm1) , 6 & 7
+		}
 
-		TCCR1A = 0x81;
-		TCCR1B = 0x01;
-			
+        TCCR2 	= 0x61;         //8-bit, Non-Inverted PWM	
 }
 
 
 void motor2(int speed, int direction){
-    	OCR1BL = speed;
-		OCR1BH = 0; 
-		PORTD = 0x10;
-		DDRD = 0x10;	// 10
-
+    	DDRD = 0x80;			// Set DDR bit (7 = OC2)
+		PORTD = 0x10;			// Set PWM2 (bit 4)
+		OCR2 = speed;   		// Load Pulse width - 175
 		if(direction == 1){
-			PORTB = 0x01;
-			DDRB = 0x01;
+			PORTB = 0x01;		// forward, bit 0
 		}else if(direction == -1){
-			PORTB = 0x02;
-			DDRB = 0x02;
+			PORTB = 0x02;		// backward, bit 1
 		}else{
-			PORTB = 0x03;
-			DDRB = 0x03;
-		} 
+			PORTB = 0x03;		// brake, bit 0 & 1
+		}
 
-		TCCR1A = 0x21;
-		TCCR1B = 0x01;
+        TCCR2 	= 0x61;         //8-bit, Non-Inverted PWM
 }
 
