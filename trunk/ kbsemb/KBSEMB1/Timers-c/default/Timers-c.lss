@@ -274,8 +274,8 @@ ISR(TIMER2_COMP_vect){
  144:	90 91 61 00 	lds	r25, 0x0061
  148:	89 2b       	or	r24, r25
  14a:	69 f4       	brne	.+26     	; 0x166 <__vector_3+0x48>
-		motor1(0xFF, 0);	// Start motor 1 motorX(speed,direction);
- 14c:	60 e0       	ldi	r22, 0x00	; 0
+		motor1(0xFF, 1);	// Start motor 1 motorX(speed,direction);
+ 14c:	61 e0       	ldi	r22, 0x01	; 1
  14e:	70 e0       	ldi	r23, 0x00	; 0
  150:	8f ef       	ldi	r24, 0xFF	; 255
  152:	90 e0       	ldi	r25, 0x00	; 0
@@ -287,8 +287,8 @@ ISR(TIMER2_COMP_vect){
  160:	80 93 60 00 	sts	0x0060, r24
  164:	0a c0       	rjmp	.+20     	; 0x17a <__vector_3+0x5c>
 	}else{
-		motor2(0xFF, 0);
- 166:	60 e0       	ldi	r22, 0x00	; 0
+		motor2(0xFF, 1);
+ 166:	61 e0       	ldi	r22, 0x01	; 1
  168:	70 e0       	ldi	r23, 0x00	; 0
  16a:	8f ef       	ldi	r24, 0xFF	; 255
  16c:	90 e0       	ldi	r25, 0x00	; 0
