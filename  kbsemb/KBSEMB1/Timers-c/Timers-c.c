@@ -42,10 +42,10 @@ void forever(){
 /* If an interrupt accures, execute this code */
 ISR(TIMER2_COMP_vect){
 	if(i == 0){
-		motor1(0xFF, 0);	// Start motor 1 motorX(speed,direction);
+		motor1(0xFF, 1);	// Start motor 1 motorX(speed,direction);
 		i = 1;
 	}else{
-		motor2(0xFF, 0);
+		motor2(0xFF, 1);
 		i = 0;
 	}
 	
