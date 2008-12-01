@@ -9,7 +9,6 @@ Timers-c.o: ../Timers-c.c \
   d:/winavr/winavr/lib/gcc/../../avr/include/avr/version.h \
   d:/winavr/winavr/lib/gcc/../../avr/include/avr/fuse.h \
   d:/winavr/winavr/lib/gcc/../../avr/include/avr/lock.h \
-  d:/winavr/winavr/lib/gcc/../../avr/include/avr/signal.h \
   d:/winavr/winavr/lib/gcc/../../avr/include/avr/interrupt.h
 
 d:/winavr/winavr/lib/gcc/../../avr/include/avr/io.h:
@@ -31,7 +30,5 @@ d:/winavr/winavr/lib/gcc/../../avr/include/avr/version.h:
 d:/winavr/winavr/lib/gcc/../../avr/include/avr/fuse.h:
 
 d:/winavr/winavr/lib/gcc/../../avr/include/avr/lock.h:
-
-d:/winavr/winavr/lib/gcc/../../avr/include/avr/signal.h:
 
 d:/winavr/winavr/lib/gcc/../../avr/include/avr/interrupt.h:
