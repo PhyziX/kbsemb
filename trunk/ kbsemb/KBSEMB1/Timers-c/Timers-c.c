@@ -1,8 +1,6 @@
 #include   	<avr/io.h>
 #include 	<avr/iom16.h>
-#include 	<avr/signal.h>
 #include 	<avr/interrupt.h>
-#include	<avr/sfr_defs.h>
 
 void motor1(int,int);			// funtion declaration
 void motor2(int,int);			// funtion declaration
