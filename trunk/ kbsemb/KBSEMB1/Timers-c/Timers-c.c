@@ -5,6 +5,7 @@
 void motor1(int,int);			// funtion declaration
 void motor2(int,int);			// funtion declaration
 void forever();					// funtion declaration
+void init();
 
 volatile int mSpeed = 0x8C;		// motor speed, start at 140
 int up = 1;						// motorspeed up / down counter
@@ -14,7 +15,15 @@ volatile int direction2 = 0;	// motor2: 0 = not running, 1 = forward, -1 = break
 /* Initialize variables for interrupt */
 int main(void) {
 	
-	cli();
+	cli();						// Disable interrupts
+	init();						// Initialze registers
+	sei();						// Enable interrupts
+
+	forever(); 					// Goto an endless loop
+} 
+
+/* Initialze registers */
+void init(){
 	// Set values for timer/counter2 interrupt
 		TCCR2 = 0x02;			// COM20 & CS21
 		OCR2 = 0xFC;			// fc Output compare 
@@ -31,11 +40,7 @@ int main(void) {
 
 	// Onboard leds off
 		DDRB = 0xFF;
-	sei();
-
-	forever(); 					// Goto an endless loop
-} 
-
+}
 /* Start an endless loop  */
 void forever(){
 	// if PB2 is pushed, start the motors or reverse
