@@ -353,10 +353,10 @@ LOAD c:/winavr-20080610/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a
  *(.debug_frame)
  .debug_frame   0x00000000       0x90 Ultrasonic.o
 
-.debug_str      0x00000000       0xfc
+.debug_str      0x00000000      0x101
  *(.debug_str)
- .debug_str     0x00000000       0xfc Ultrasonic.o
-                                0x130 (size before relaxing)
+ .debug_str     0x00000000      0x101 Ultrasonic.o
+                                0x135 (size before relaxing)
 
 .debug_loc      0x00000000       0x50
  *(.debug_loc)
