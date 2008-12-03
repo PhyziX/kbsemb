@@ -116,7 +116,7 @@ LOAD d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x2a6
+.text           0x00000000      0x2ca
  *(.vectors)
  .vectors       0x00000000       0x54 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vectors
@@ -191,26 +191,27 @@ LOAD d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a
                 0x0000008e                __vector_16
                 0x0000008e                __vector_18
                 0x0000008e                __vector_20
- .text          0x00000092      0x210 Timers-c.o
-                0x00000284                motor2
-                0x00000216                __vector_3
-                0x00000192                main
-                0x000001c2                __vector_4
-                0x00000266                motor1
-                0x00000092                forever
- .text          0x000002a2        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
- .text          0x000002a2        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_copy_data.o)
- .text          0x000002a2        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_clear_bss.o)
-                0x000002a2                . = ALIGN (0x2)
+ .text          0x00000092      0x234 Timers-c.o
+                0x000002a8                motor2
+                0x0000023a                __vector_3
+                0x00000092                init
+                0x000001b6                main
+                0x000001e6                __vector_4
+                0x0000028a                motor1
+                0x000000b6                forever
+ .text          0x000002c6        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
+ .text          0x000002c6        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_copy_data.o)
+ .text          0x000002c6        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_clear_bss.o)
+                0x000002c6                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x000002a2        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x000002a2        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x000002a2        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_clear_bss.o)
-                0x000002a2                . = ALIGN (0x2)
+ .text.libgcc   0x000002c6        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000002c6        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000002c6        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_clear_bss.o)
+                0x000002c6                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000002a2        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
-                0x000002a2                exit
-                0x000002a2                _exit
+ .fini9         0x000002c6        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
+                0x000002c6                exit
+                0x000002c6                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -229,11 +230,11 @@ LOAD d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000002a2        0x4 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000002c6        0x4 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000002a6                _etext = .
+                0x000002ca                _etext = .
 
-.data           0x00800060        0x4 load address 0x000002a6
+.data           0x00800060        0x4 load address 0x000002ca
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/../../../../avr/lib/avr5/crtm16.o
@@ -251,7 +252,7 @@ LOAD d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a
                 0x00800064                _edata = .
                 0x00800064                PROVIDE (__data_end, .)
 
-.bss            0x00800064        0x4 load address 0x000002aa
+.bss            0x00800064        0x4 load address 0x000002ce
                 0x00800064                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800064        0x0 d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/../../../../avr/lib/avr5/crtm16.o
@@ -264,8 +265,8 @@ LOAD d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a
  *(.bss*)
  *(COMMON)
                 0x00800068                PROVIDE (__bss_end, .)
-                0x000002a6                __data_load_start = LOADADDR (.data)
-                0x000002aa                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000002ca                __data_load_start = LOADADDR (.data)
+                0x000002ce                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800068        0x0
                 0x00800068                PROVIDE (__noinit_start, .)
@@ -329,32 +330,32 @@ LOAD d:/winavr/winavr/bin/../lib/gcc/avr/4.3.0/avr5\libgcc.a
                 0x00000000       0x20 Timers-c.o
 
 .debug_pubnames
-                0x00000000       0x8b
+                0x00000000       0x94
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000       0x8b Timers-c.o
+                0x00000000       0x94 Timers-c.o
 
-.debug_info     0x00000000      0x1d9
+.debug_info     0x00000000      0x206
  *(.debug_info)
- .debug_info    0x00000000      0x1d9 Timers-c.o
+ .debug_info    0x00000000      0x206 Timers-c.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000       0xeb
+.debug_abbrev   0x00000000      0x118
  *(.debug_abbrev)
- .debug_abbrev  0x00000000       0xeb Timers-c.o
+ .debug_abbrev  0x00000000      0x118 Timers-c.o
 
-.debug_line     0x00000000      0x2a8
+.debug_line     0x00000000      0x302
  *(.debug_line)
- .debug_line    0x00000000      0x2a8 Timers-c.o
+ .debug_line    0x00000000      0x302 Timers-c.o
 
-.debug_frame    0x00000000       0x70
+.debug_frame    0x00000000       0x80
  *(.debug_frame)
- .debug_frame   0x00000000       0x70 Timers-c.o
+ .debug_frame   0x00000000       0x80 Timers-c.o
 
-.debug_str      0x00000000       0xdd
+.debug_str      0x00000000       0xe2
  *(.debug_str)
- .debug_str     0x00000000       0xdd Timers-c.o
-                                0x111 (size before relaxing)
+ .debug_str     0x00000000       0xe2 Timers-c.o
+                                0x116 (size before relaxing)
 
 .debug_loc      0x00000000       0x50
  *(.debug_loc)
