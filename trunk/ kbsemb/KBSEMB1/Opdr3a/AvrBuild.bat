@@ -1,2 +1,0 @@
-@ECHO OFF
-"C:\Program Files\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\Documents and Settings\Asteroid\Opdr3a\labels.tmp" -fI -W+ie -o "C:\Documents and Settings\Asteroid\Opdr3a\Opdr3a.hex" -d "C:\Documents and Settings\Asteroid\Opdr3a\Opdr3a.obj" -e "C:\Documents and Settings\Asteroid\Opdr3a\Opdr3a.eep" -m "C:\Documents and Settings\Asteroid\Opdr3a\Opdr3a.map" "C:\Documents and Settings\Asteroid\Opdr3a\Opdr3a.asm"
