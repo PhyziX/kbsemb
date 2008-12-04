@@ -1,0 +1,509 @@
+
+Ultrasonic.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000256  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  00000256  000002ca  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  00800064  0000025a  000002ce  2**0
+                  ALLOC
+  3 .debug_aranges 00000020  00000000  00000000  000002ce  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000009e  00000000  00000000  000002ee  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000268  00000000  00000000  0000038c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000149  00000000  00000000  000005f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000031b  00000000  00000000  0000073d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000090  00000000  00000000  00000a58  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000000fc  00000000  00000000  00000ae8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000050  00000000  00000000  00000be4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 e3 00 	jmp	0x1c6	; 0x1c6 <__vector_3>
+  10:	0c 94 b9 00 	jmp	0x172	; 0x172 <__vector_4>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e6 e5       	ldi	r30, 0x56	; 86
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a4 36       	cpi	r26, 0x64	; 100
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a4 e6       	ldi	r26, 0x64	; 100
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a8 36       	cpi	r26, 0x68	; 104
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 a1 00 	call	0x142	; 0x142 <main>
+  8a:	0c 94 29 01 	jmp	0x252	; 0x252 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <delay>:
+ * RETURNS     : void
+ * SIDE EFFECTS: none
+ */
+
+void delay( const int ms )
+{
+  92:	20 e0       	ldi	r18, 0x00	; 0
+  94:	30 e0       	ldi	r19, 0x00	; 0
+  96:	02 c0       	rjmp	.+4      	; 0x9c <delay+0xa>
+  T_Unsigned_16 i, j;
+  for ( i = 0; i <= ms; i++ )
+  98:	2f 5f       	subi	r18, 0xFF	; 255
+  9a:	3f 4f       	sbci	r19, 0xFF	; 255
+  9c:	82 17       	cp	r24, r18
+  9e:	93 07       	cpc	r25, r19
+  a0:	d8 f7       	brcc	.-10     	; 0x98 <delay+0x6>
+      for ( j = 0; j <= 1000; j++ )
+    {
+      /* doe niets */
+    }
+  }
+}
+  a2:	08 95       	ret
+
+000000a4 <init>:
+
+	forever(); 					// Goto an endless loop
+} 
+
+/* Initialze registers */
+void init(){
+  a4:	82 e0       	ldi	r24, 0x02	; 2
+  a6:	85 bd       	out	0x25, r24	; 37
+	// Set values for timer/counter2 interrupt
+		TCCR2 = 0x02;			// COM20 & CS21
+		OCR2 = 0xFC;			// fc Output compare 
+  a8:	8c ef       	ldi	r24, 0xFC	; 252
+  aa:	83 bd       	out	0x23, r24	; 35
+		TIMSK = 0xC0;			// Set compare flag, overflow & compare
+  ac:	80 ec       	ldi	r24, 0xC0	; 192
+  ae:	89 bf       	out	0x39, r24	; 57
+		TCNT2 = 0xF8;			// Reset counter
+  b0:	88 ef       	ldi	r24, 0xF8	; 248
+  b2:	84 bd       	out	0x24, r24	; 36
+	
+	// Set values for timer/counter1 (motors)
+		TCCR1A = 0xA1;			// Set COM1A1, COM1B1 & WGM10
+  b4:	81 ea       	ldi	r24, 0xA1	; 161
+  b6:	8f bd       	out	0x2f, r24	; 47
+		TCCR1B = 0x01;			// CS10
+  b8:	81 e0       	ldi	r24, 0x01	; 1
+  ba:	8e bd       	out	0x2e, r24	; 46
+
+	// Set PWM signal for motors
+		PORTD = 0x34;			// Set PWM1 & PWM2 signal
+  bc:	84 e3       	ldi	r24, 0x34	; 52
+  be:	82 bb       	out	0x12, r24	; 18
+		DDRD = 0x34;			// Set PWM1 & PWM2 signal
+  c0:	81 bb       	out	0x11, r24	; 17
+
+	// Onboard leds off
+		DDRB = 0xFF;
+  c2:	8f ef       	ldi	r24, 0xFF	; 255
+  c4:	87 bb       	out	0x17, r24	; 23
+}
+  c6:	08 95       	ret
+
+000000c8 <forever>:
+/* Start an endless loop  */
+void forever(){
+  c8:	ef ef       	ldi	r30, 0xFF	; 255
+	DDRA = 0xFF;
+	PORTA = 0x80;
+  ca:	70 e8       	ldi	r23, 0x80	; 128
+	delay(3);
+	PORTA = 0x00;
+	DDRA = 0x00;
+
+	TCNT0 = 0x00;
+	TCCR0 = 0x01;
+  cc:	61 e0       	ldi	r22, 0x01	; 1
+
+	TCCR0 = 0x00;
+
+	if(TCNT0 < 10000){
+		if(((direction1 == -1) && (direction2 == -1)) || ((direction1 == 0) && (direction2 == 0))){
+			direction1 = 1;				// motor1 forward
+  ce:	41 e0       	ldi	r20, 0x01	; 1
+  d0:	50 e0       	ldi	r21, 0x00	; 0
+			direction2 = 1;				// motor2 forward
+		}else{
+			direction1 = -1;			// motor1 backward
+  d2:	2f ef       	ldi	r18, 0xFF	; 255
+  d4:	3f ef       	ldi	r19, 0xFF	; 255
+	// Onboard leds off
+		DDRB = 0xFF;
+}
+/* Start an endless loop  */
+void forever(){
+	DDRA = 0xFF;
+  d6:	ea bb       	out	0x1a, r30	; 26
+	PORTA = 0x80;
+  d8:	7b bb       	out	0x1b, r23	; 27
+	delay(3);
+	PORTA = 0x00;
+  da:	1b ba       	out	0x1b, r1	; 27
+	DDRA = 0x00;
+  dc:	1a ba       	out	0x1a, r1	; 26
+
+	TCNT0 = 0x00;
+  de:	12 be       	out	0x32, r1	; 50
+	TCCR0 = 0x01;
+  e0:	63 bf       	out	0x33, r22	; 51
+
+	while((PINA & (1 << 1)) == 0){}
+  e2:	c9 9b       	sbis	0x19, 1	; 25
+  e4:	fe cf       	rjmp	.-4      	; 0xe2 <forever+0x1a>
+
+	TCCR0 = 0x00;
+  e6:	13 be       	out	0x33, r1	; 51
+
+	if(TCNT0 < 10000){
+  e8:	82 b7       	in	r24, 0x32	; 50
+		if(((direction1 == -1) && (direction2 == -1)) || ((direction1 == 0) && (direction2 == 0))){
+  ea:	80 91 64 00 	lds	r24, 0x0064
+  ee:	90 91 65 00 	lds	r25, 0x0065
+  f2:	8f 5f       	subi	r24, 0xFF	; 255
+  f4:	9f 4f       	sbci	r25, 0xFF	; 255
+  f6:	39 f4       	brne	.+14     	; 0x106 <forever+0x3e>
+  f8:	80 91 66 00 	lds	r24, 0x0066
+  fc:	90 91 67 00 	lds	r25, 0x0067
+ 100:	8f 5f       	subi	r24, 0xFF	; 255
+ 102:	9f 4f       	sbci	r25, 0xFF	; 255
+ 104:	61 f0       	breq	.+24     	; 0x11e <forever+0x56>
+ 106:	80 91 64 00 	lds	r24, 0x0064
+ 10a:	90 91 65 00 	lds	r25, 0x0065
+ 10e:	89 2b       	or	r24, r25
+ 110:	79 f4       	brne	.+30     	; 0x130 <forever+0x68>
+ 112:	80 91 66 00 	lds	r24, 0x0066
+ 116:	90 91 67 00 	lds	r25, 0x0067
+ 11a:	89 2b       	or	r24, r25
+ 11c:	49 f4       	brne	.+18     	; 0x130 <forever+0x68>
+			direction1 = 1;				// motor1 forward
+ 11e:	50 93 65 00 	sts	0x0065, r21
+ 122:	40 93 64 00 	sts	0x0064, r20
+			direction2 = 1;				// motor2 forward
+ 126:	50 93 67 00 	sts	0x0067, r21
+ 12a:	40 93 66 00 	sts	0x0066, r20
+ 12e:	d3 cf       	rjmp	.-90     	; 0xd6 <forever+0xe>
+		}else{
+			direction1 = -1;			// motor1 backward
+ 130:	30 93 65 00 	sts	0x0065, r19
+ 134:	20 93 64 00 	sts	0x0064, r18
+			direction2 = -1;			// motor2 backward
+ 138:	30 93 67 00 	sts	0x0067, r19
+ 13c:	20 93 66 00 	sts	0x0066, r18
+ 140:	ca cf       	rjmp	.-108    	; 0xd6 <forever+0xe>
+
+00000142 <main>:
+int up = 1;						// motorspeed up / down counter
+volatile int direction1 = 0;	// motor1: 0 = not running, 1 = forward, -1 = break
+volatile int direction2 = 0;	// motor2: 0 = not running, 1 = forward, -1 = break
+
+/* Initialize variables for interrupt */
+int main(void) {
+ 142:	f8 94       	cli
+} 
+
+/* Initialze registers */
+void init(){
+	// Set values for timer/counter2 interrupt
+		TCCR2 = 0x02;			// COM20 & CS21
+ 144:	82 e0       	ldi	r24, 0x02	; 2
+ 146:	85 bd       	out	0x25, r24	; 37
+		OCR2 = 0xFC;			// fc Output compare 
+ 148:	8c ef       	ldi	r24, 0xFC	; 252
+ 14a:	83 bd       	out	0x23, r24	; 35
+		TIMSK = 0xC0;			// Set compare flag, overflow & compare
+ 14c:	80 ec       	ldi	r24, 0xC0	; 192
+ 14e:	89 bf       	out	0x39, r24	; 57
+		TCNT2 = 0xF8;			// Reset counter
+ 150:	88 ef       	ldi	r24, 0xF8	; 248
+ 152:	84 bd       	out	0x24, r24	; 36
+	
+	// Set values for timer/counter1 (motors)
+		TCCR1A = 0xA1;			// Set COM1A1, COM1B1 & WGM10
+ 154:	81 ea       	ldi	r24, 0xA1	; 161
+ 156:	8f bd       	out	0x2f, r24	; 47
+		TCCR1B = 0x01;			// CS10
+ 158:	81 e0       	ldi	r24, 0x01	; 1
+ 15a:	8e bd       	out	0x2e, r24	; 46
+
+	// Set PWM signal for motors
+		PORTD = 0x34;			// Set PWM1 & PWM2 signal
+ 15c:	84 e3       	ldi	r24, 0x34	; 52
+ 15e:	82 bb       	out	0x12, r24	; 18
+		DDRD = 0x34;			// Set PWM1 & PWM2 signal
+ 160:	81 bb       	out	0x11, r24	; 17
+
+	// Onboard leds off
+		DDRB = 0xFF;
+ 162:	8f ef       	ldi	r24, 0xFF	; 255
+ 164:	87 bb       	out	0x17, r24	; 23
+/* Initialize variables for interrupt */
+int main(void) {
+	
+	cli();						// Disable interrupts
+	init();						// Initialze registers
+	sei();						// Enable interrupts
+ 166:	78 94       	sei
+
+	forever(); 					// Goto an endless loop
+ 168:	0e 94 64 00 	call	0xc8	; 0xc8 <forever>
+} 
+ 16c:	80 e0       	ldi	r24, 0x00	; 0
+ 16e:	90 e0       	ldi	r25, 0x00	; 0
+ 170:	08 95       	ret
+
+00000172 <__vector_4>:
+
+	forever();							// Start an endless loop
+}
+
+// Interrupt routine: Overflow
+ISR(TIMER2_OVF_vect){					
+ 172:	1f 92       	push	r1
+ 174:	0f 92       	push	r0
+ 176:	0f b6       	in	r0, 0x3f	; 63
+ 178:	0f 92       	push	r0
+ 17a:	11 24       	eor	r1, r1
+ 17c:	2f 93       	push	r18
+ 17e:	3f 93       	push	r19
+ 180:	8f 93       	push	r24
+ 182:	9f 93       	push	r25
+	motor1(mSpeed, direction1);			// Start motor1
+ 184:	20 91 64 00 	lds	r18, 0x0064
+ 188:	30 91 65 00 	lds	r19, 0x0065
+ 18c:	80 91 60 00 	lds	r24, 0x0060
+ 190:	90 91 61 00 	lds	r25, 0x0061
+	motor2(mSpeed, direction2);			// Start motor2
+}
+
+
+void motor1(int speed, int direction){
+		OCR1AL = speed;					// Save speed in OCR1AL
+ 194:	8a bd       	out	0x2a, r24	; 42
+		OCR1AH = 0; 
+ 196:	1b bc       	out	0x2b, r1	; 43
+		
+		if(direction == 1){				// If forward
+ 198:	21 30       	cpi	r18, 0x01	; 1
+ 19a:	31 05       	cpc	r19, r1
+ 19c:	11 f4       	brne	.+4      	; 0x1a2 <__vector_4+0x30>
+			PORTD = 0x70;				// PWM1,PWM2 & Forward bit
+ 19e:	80 e7       	ldi	r24, 0x70	; 112
+ 1a0:	06 c0       	rjmp	.+12     	; 0x1ae <__vector_4+0x3c>
+		}else if(direction == -1){		// If backward
+ 1a2:	2f 5f       	subi	r18, 0xFF	; 255
+ 1a4:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1a6:	11 f4       	brne	.+4      	; 0x1ac <__vector_4+0x3a>
+			PORTD = 0xB0;				// PWM1,PWM2 & Backward bit
+ 1a8:	80 eb       	ldi	r24, 0xB0	; 176
+ 1aa:	01 c0       	rjmp	.+2      	; 0x1ae <__vector_4+0x3c>
+		}else{							// Else, stop
+			PORTD = 0xF0;				// PWM1,PWM2 & Forward & backward bit
+ 1ac:	80 ef       	ldi	r24, 0xF0	; 240
+ 1ae:	82 bb       	out	0x12, r24	; 18
+}
+
+// Interrupt routine: Overflow
+ISR(TIMER2_OVF_vect){					
+	motor1(mSpeed, direction1);			// Start motor1
+	TCNT2 = 0xF8;						// Set counter value 
+ 1b0:	88 ef       	ldi	r24, 0xF8	; 248
+ 1b2:	84 bd       	out	0x24, r24	; 36
+}
+ 1b4:	9f 91       	pop	r25
+ 1b6:	8f 91       	pop	r24
+ 1b8:	3f 91       	pop	r19
+ 1ba:	2f 91       	pop	r18
+ 1bc:	0f 90       	pop	r0
+ 1be:	0f be       	out	0x3f, r0	; 63
+ 1c0:	0f 90       	pop	r0
+ 1c2:	1f 90       	pop	r1
+ 1c4:	18 95       	reti
+
+000001c6 <__vector_3>:
+
+// Interrupt routine: Compare
+ISR(TIMER2_COMP_vect){
+ 1c6:	1f 92       	push	r1
+ 1c8:	0f 92       	push	r0
+ 1ca:	0f b6       	in	r0, 0x3f	; 63
+ 1cc:	0f 92       	push	r0
+ 1ce:	11 24       	eor	r1, r1
+ 1d0:	2f 93       	push	r18
+ 1d2:	3f 93       	push	r19
+ 1d4:	8f 93       	push	r24
+ 1d6:	9f 93       	push	r25
+	motor2(mSpeed, direction2);			// Start motor2
+ 1d8:	20 91 66 00 	lds	r18, 0x0066
+ 1dc:	30 91 67 00 	lds	r19, 0x0067
+ 1e0:	80 91 60 00 	lds	r24, 0x0060
+ 1e4:	90 91 61 00 	lds	r25, 0x0061
+			PORTD = 0xF0;				// PWM1,PWM2 & Forward & backward bit
+		} 
+}
+
+void motor2(int speed, int direction){
+		OCR1BL = speed;					// Save speed in OCR1BL
+ 1e8:	88 bd       	out	0x28, r24	; 40
+		OCR1BH = 0; 
+ 1ea:	19 bc       	out	0x29, r1	; 41
+	
+		if(direction == 1){				// If forward
+ 1ec:	21 30       	cpi	r18, 0x01	; 1
+ 1ee:	31 05       	cpc	r19, r1
+ 1f0:	11 f4       	brne	.+4      	; 0x1f6 <__vector_3+0x30>
+			PORTB = 0x02;				// Forward bit
+ 1f2:	82 e0       	ldi	r24, 0x02	; 2
+ 1f4:	06 c0       	rjmp	.+12     	; 0x202 <__vector_3+0x3c>
+		}else if(direction == -1){		// If backward
+ 1f6:	2f 5f       	subi	r18, 0xFF	; 255
+ 1f8:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1fa:	11 f4       	brne	.+4      	; 0x200 <__vector_3+0x3a>
+			PORTB = 0x01;				// Backward bit
+ 1fc:	81 e0       	ldi	r24, 0x01	; 1
+ 1fe:	01 c0       	rjmp	.+2      	; 0x202 <__vector_3+0x3c>
+		}else{							// Else, stop
+			PORTB = 0x03;				// Forward & backward bit
+ 200:	83 e0       	ldi	r24, 0x03	; 3
+ 202:	88 bb       	out	0x18, r24	; 24
+}
+
+// Interrupt routine: Compare
+ISR(TIMER2_COMP_vect){
+	motor2(mSpeed, direction2);			// Start motor2
+}
+ 204:	9f 91       	pop	r25
+ 206:	8f 91       	pop	r24
+ 208:	3f 91       	pop	r19
+ 20a:	2f 91       	pop	r18
+ 20c:	0f 90       	pop	r0
+ 20e:	0f be       	out	0x3f, r0	; 63
+ 210:	0f 90       	pop	r0
+ 212:	1f 90       	pop	r1
+ 214:	18 95       	reti
+
+00000216 <motor1>:
+
+
+void motor1(int speed, int direction){
+ 216:	8a bd       	out	0x2a, r24	; 42
+		OCR1AL = speed;					// Save speed in OCR1AL
+		OCR1AH = 0; 
+ 218:	1b bc       	out	0x2b, r1	; 43
+		
+		if(direction == 1){				// If forward
+ 21a:	61 30       	cpi	r22, 0x01	; 1
+ 21c:	71 05       	cpc	r23, r1
+ 21e:	11 f4       	brne	.+4      	; 0x224 <motor1+0xe>
+			PORTD = 0x70;				// PWM1,PWM2 & Forward bit
+ 220:	80 e7       	ldi	r24, 0x70	; 112
+ 222:	06 c0       	rjmp	.+12     	; 0x230 <motor1+0x1a>
+		}else if(direction == -1){		// If backward
+ 224:	6f 5f       	subi	r22, 0xFF	; 255
+ 226:	7f 4f       	sbci	r23, 0xFF	; 255
+ 228:	11 f4       	brne	.+4      	; 0x22e <motor1+0x18>
+			PORTD = 0xB0;				// PWM1,PWM2 & Backward bit
+ 22a:	80 eb       	ldi	r24, 0xB0	; 176
+ 22c:	01 c0       	rjmp	.+2      	; 0x230 <motor1+0x1a>
+		}else{							// Else, stop
+			PORTD = 0xF0;				// PWM1,PWM2 & Forward & backward bit
+ 22e:	80 ef       	ldi	r24, 0xF0	; 240
+ 230:	82 bb       	out	0x12, r24	; 18
+ 232:	08 95       	ret
+
+00000234 <motor2>:
+		} 
+}
+
+void motor2(int speed, int direction){
+ 234:	88 bd       	out	0x28, r24	; 40
+		OCR1BL = speed;					// Save speed in OCR1BL
+		OCR1BH = 0; 
+ 236:	19 bc       	out	0x29, r1	; 41
+	
+		if(direction == 1){				// If forward
+ 238:	61 30       	cpi	r22, 0x01	; 1
+ 23a:	71 05       	cpc	r23, r1
+ 23c:	11 f4       	brne	.+4      	; 0x242 <motor2+0xe>
+			PORTB = 0x02;				// Forward bit
+ 23e:	82 e0       	ldi	r24, 0x02	; 2
+ 240:	06 c0       	rjmp	.+12     	; 0x24e <motor2+0x1a>
+		}else if(direction == -1){		// If backward
+ 242:	6f 5f       	subi	r22, 0xFF	; 255
+ 244:	7f 4f       	sbci	r23, 0xFF	; 255
+ 246:	11 f4       	brne	.+4      	; 0x24c <motor2+0x18>
+			PORTB = 0x01;				// Backward bit
+ 248:	81 e0       	ldi	r24, 0x01	; 1
+ 24a:	01 c0       	rjmp	.+2      	; 0x24e <motor2+0x1a>
+		}else{							// Else, stop
+			PORTB = 0x03;				// Forward & backward bit
+ 24c:	83 e0       	ldi	r24, 0x03	; 3
+ 24e:	88 bb       	out	0x18, r24	; 24
+ 250:	08 95       	ret
+
+00000252 <_exit>:
+ 252:	f8 94       	cli
+
+00000254 <__stop_program>:
+ 254:	ff cf       	rjmp	.-2      	; 0x254 <__stop_program>
