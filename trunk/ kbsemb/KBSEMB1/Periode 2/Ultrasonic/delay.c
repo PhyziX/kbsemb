@@ -13,12 +13,12 @@
  * SIDE EFFECTS: none
  */
 
-void delay( const int ms )
+void delay_us( const int ms )
 {
   T_Unsigned_16 i, j;
   for ( i = 0; i <= ms; i++ )
   {
-      for ( j = 0; j <= 1000; j++ )
+      for ( j = 0; j <= 1; j++ )
     {
       /* doe niets */
     }

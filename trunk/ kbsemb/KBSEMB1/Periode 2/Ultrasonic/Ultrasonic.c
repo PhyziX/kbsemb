@@ -44,16 +44,52 @@ void init(){
 }
 /* Start an endless loop  */
 void forever(){
-	DDRA = 0xFF;
-	PORTA = 0x80;
-	delay(3);
-	PORTA = 0x00;
-	DDRA = 0x00;
+	TCCR0 = 0x02; // clkI/O/8 (From prescaler)
+	TCNT0 = 0x00; // set counter to 0
+
+	// Begin trigger pulse
+	DDRC = 0xFF;
+	PORTC = 0x00;
+	delay_us(3);
+	PORTC = 0x01;
+	delay_us(3);
+	PORTC = 0x00;
+	// End trigger pulse
+
+	PORTC = 0x01;
+	PINC = 0x01;
+	DDRC = 0xFF;
+	while(bit_is_set(PINC,0)){}
+	TCNT0=0x00;	//clear timer 
+	while(!bit_is_set(PINC,0)){}
+
+	if(TCNT0 < 0xFF){
+		direction1 = 0;				// motor1 forward
+		direction2 = 0;	
+
+	}
+
+	
+	/* FLIP_PORT(DDRC, PingPin);   // Switch PingPin to INPUT
+loop_until_bit_is_set(PINC, PingPin);     // Loop until the the PingPin goes high  (macro found in sfr_def.h)
+//clears timer, reset overflow counter
+reset_timer_0();       //reset timer 0
+loop_until_bit_is_clear(PINC, PingPin);     // Loop until the the PingPin goes low  (macro found in sfr_def.h)
+//read timer0's overflow counter
+//255 is count before overflow, dependent on clock
+int elapsed_time=timer0GetOverflowCount()*255+TCNT0;
+//   The PING))) returns a pulse width of 29.033 uS per centimeter
+PingVal = elapsed_time; */
+	
+	
+	
+	
+	/* DDRC = 0x00;
 
 	TCNT0 = 0x00;
 	TCCR0 = 0x01;
 
-	while((PINA & (1 << 1)) == 0){}
+	while(bit_is_set(PINC,0)){}
 
 	TCCR0 = 0x00;
 
@@ -65,7 +101,7 @@ void forever(){
 			direction1 = -1;			// motor1 backward
 			direction2 = -1;			// motor2 backward
 		}
-	}
+	} */
 
 	forever();							// Start an endless loop
 }
