@@ -6,23 +6,23 @@ int distance;
 void USART_init();
 void USART_SendByte(uint8_t);
 int main(void){
-	TCCR0 = 0x01;  // cs00, no prescaling
+	TCCR0 = 0x05;  // 1024, no prescaling
 	while(1){
         // Output pulse to Ping))) 
-        DDRB = (1 << PB3); 
+        DDRC = (1 << PC3); 
         _delay_us(5); 
 
         // Bring pin to high-z input 
-        DDRB = 0x00; 
+        DDRC = 0x00; 
 
         _delay_us(750); 
   
        // wait for PB3 to go high 
-        loop_until_bit_is_set(PINB, PINB3); 
+        loop_until_bit_is_set(PINC, PINC3); 
         TCNT0 = 0; 
 
         // wait for PB3 to go low 
-        loop_until_bit_is_clear(PINB, PINB3); 
+        loop_until_bit_is_clear(PINC, PINC3); 
         //distance = (0.27 * TCNT1) / 29.033;    // 3.6864MHz = 0.27uS/cycle; 29.033uS/cm 
         distance = ((0.27 * TCNT0) / 73.746) / 2;    // 3.6864MHz = 0.27uS/cycle; 73.746uS/in; 2 (round trip time) 
         //itoa(TCNT1, buffer, 10); 
