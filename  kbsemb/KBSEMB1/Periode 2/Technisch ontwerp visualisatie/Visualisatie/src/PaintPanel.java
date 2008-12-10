@@ -1,5 +1,6 @@
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /*
@@ -12,8 +13,30 @@ import javax.swing.*;
  * @author Gerhard
  */
 public class PaintPanel extends JPanel {
+    public int posX = 6;
+    public int posY = 6;
+    public ArrayList<int[]> moveList;
 
     public PaintPanel(){
+        moveList = new ArrayList<int[]>();
+        makeMove(6,5);
+        makeMove(6,4);
+        makeMove(5,4);
+        makeMove(5,3);
+        makeMove(4,3);
+        makeMove(4,4);
+        makeMove(3,4);
+        makeMove(3,3);
+        makeMove(3,2);
+        makeMove(4,2);
+        makeMove(4,1);
+        makeMove(3,1);
+        makeMove(2,1);
+        makeMove(2,2);
+        makeMove(2,3);
+        makeMove(1,3);
+        makeMove(1,2);
+        
         setSize(500, 500);
     }
 
@@ -44,19 +67,47 @@ public class PaintPanel extends JPanel {
         g.drawLine(330,490,330,250);
         g.drawLine(330,410,410,410);
         g.drawLine(410,410,410,330);
-        /*for(int v = 10; v <= 490; v += 80) {
-             g.drawLine(v, 10, v, 490);
-        }
-        for(int h = 10; h <= 490; h += 80) {
-             g.drawLine(10, h, 490, h);
-        }*/
 
-        paintRobot(g);
+        paintRobot(g,((posX * 80) - 35),((posY * 80) - 35));
+
+        if(!moveList.isEmpty()){
+            for (int i=0; i < moveList.size(); i++) {
+                int[] pos = moveList.get(i);
+                if(i == 0){
+                    g.drawLine(((posX * 80) - 30), ((posY * 80) - 30), ((pos[0] * 80) - 30), ((pos[1] * 80) - 30));
+                }
+                else{
+                    int[] prevPos = moveList.get(i -1);
+                    g.drawLine(((prevPos[0] * 80) - 30), ((prevPos[1] * 80) - 30), ((pos[0] * 80) - 30), ((pos[1] * 80) - 30));
+                }
+            }
+        }
     }
 
-    public void paintRobot(Graphics g){
+    public void paintRobot(Graphics g,int x,int y){
         g.setColor(Color.RED);
-        g.fillOval(445, 445, 10, 10);
+        g.fillOval(x, y, 10, 10);
+    }
+
+    public void setPosY(int y){
+        posY = y;
+    }
+
+    public void setPosX(int x){
+        posX = x;
+    }
+
+    public void emptyList(){
+        moveList.clear();
+        posX = 6;
+        posY = 6;
+        repaint();
+    }
+
+    public void makeMove(int x,int y){
+        int[] nextPos = {x,y};
+        moveList.add(nextPos);
+        repaint();
     }
 
 }
