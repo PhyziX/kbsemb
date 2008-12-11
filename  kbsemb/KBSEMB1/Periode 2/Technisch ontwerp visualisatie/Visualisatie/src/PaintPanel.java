@@ -71,6 +71,11 @@ public class PaintPanel extends JPanel {
         paintRobot(g,((posX * 80) - 35),((posY * 80) - 35));
 
         if(!moveList.isEmpty()){
+            int last = moveList.size() -1;
+            int[] lastPos = moveList.get(last);
+            int lastX = lastPos[0];
+            int lastY = lastPos[1];
+            paintRobot(g,((lastX * 80) - 35),((lastY * 80) - 35));
             for (int i=0; i < moveList.size(); i++) {
                 int[] pos = moveList.get(i);
                 if(i == 0){
@@ -82,6 +87,7 @@ public class PaintPanel extends JPanel {
                 }
             }
         }
+        
     }
 
     public void paintRobot(Graphics g,int x,int y){

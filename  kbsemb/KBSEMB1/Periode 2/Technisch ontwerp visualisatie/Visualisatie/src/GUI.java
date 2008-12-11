@@ -19,7 +19,7 @@ public class GUI extends JFrame implements ActionListener {
     private JLabel sensor1,sensor2,sensor3,sensor4;
     private JTextField sensorText1, sensorText2,sensorText3,sensorText4;
     private Panel p;
-    private PaintPanel paintPanel;
+    public PaintPanel paintPanel;
     public JTextArea console;
     private JScrollPane scrollpane;
     public Connection connection;
@@ -155,6 +155,7 @@ public class GUI extends JFrame implements ActionListener {
         }
         if(e.getSource() == connectButton){
             connection.connect();
+            connectButton.setEnabled(false);
         }
         if (e.getSource() == aButton){
             paintPanel.setPosY(1);

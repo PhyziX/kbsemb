@@ -5,13 +5,14 @@ import java.io.*;
 public class Connection implements Runnable, SerialPortEventListener
 {
     // Initialize variables
+    static int START_X = 6, START_Y = 6, INITIALIZE_ROBOT = 100, NEXT_X = 101, NEXT_Y = 102;
     String drivername = "com.sun.comm.Win32Driver",
-            defaultPort = "COM6", appName = "comm";
+            defaultPort = "COM1", appName = "comm", next = "";
     Enumeration portlist;
     CommPortIdentifier cpi = null;
     SerialPort port;
     InputStream input;
-    int baudrate, data;
+    int baudrate, data, modX, modY, nextX, nextY;
     Thread readThread;
     BufferedReader read;
     GUI gui;
@@ -31,7 +32,29 @@ public class Connection implements Runnable, SerialPortEventListener
             {
                 try{
                     data = input.read();
-                    System.out.println(data);
+                    // Initializion number
+                    if(data == INITIALIZE_ROBOT){
+                        modX = START_X - gui.paintPanel.posX;
+                        modY = START_Y - gui.paintPanel.posY;
+                        gui.console.append("\nRobot initialized");
+                    }
+                    if(next.equals("x")){
+                        nextX = data - modX;
+                        next = "";
+                    }
+                    if(next.equals("y")){
+                        nextY = data - modY;
+                        next = "";
+                        gui.paintPanel.makeMove(nextX, nextY);
+                    }
+                    if(data == NEXT_X){
+                        next = "x";
+                        gui.console.append("\nx");
+                    }
+                    if(data == NEXT_Y){
+                        next = "y";
+                        gui.console.append("\ny");
+                    }
                 }
                 catch(IOException ioe){
                     System.out.println(ioe.getMessage());
@@ -112,13 +135,13 @@ public class Connection implements Runnable, SerialPortEventListener
         readThread = new Thread(this);
         readThread.start();
 
-        gui.console.append("Connection Succesfull");
+        gui.console.append("\nConnection Succesful");
         return true;
     }
 
     public void run()
     {
-
+        
     }
 }
 
