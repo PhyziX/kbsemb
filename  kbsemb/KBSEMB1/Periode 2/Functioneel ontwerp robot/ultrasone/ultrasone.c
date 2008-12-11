@@ -1,4 +1,4 @@
-#define F_CPU 16000000UL
+#define F_CPU 8000000UL
 
 #include <stdint.h>
 #include <avr/io.h>
@@ -8,7 +8,8 @@ unsigned short int distance;
 unsigned char buffer[40];
 void USART_Init();
 void USART_SendString(unsigned char *);
-void USART_SendByte(unsigned char );
+void USART_SendByte(unsigned int );
+void send(int, int);
 // Initialise USART
 
 int main(void){
@@ -17,9 +18,10 @@ int main(void){
 	//PORTC = (1 << PC3);
 	//DDRC = (1 << PC3);
 
-	while(!(UCSRA&(1<<DOR))){
+	USART_SendByte(100);
+	//while(x!=0){
 		
-        // Output pulse to Ping))) 
+        /*// Output pulse to Ping))) 
         DDRC = (1 << PC3);
 		PORTC = (1 << PC3);
 
@@ -39,29 +41,38 @@ int main(void){
         loop_until_bit_is_clear(PINC, PINC3); 
         //distance = (0.27 * TCNT1) / 29.033;    // 3.6864MHz = 0.27uS/cycle; 29.033uS/cm 
         distance = TCNT0;//((0.27 * TCNT0) / 73.746) / 2;    // 3.6864MHz = 0.27uS/cycle; 73.746uS/in; 2 (round trip time) 
-        //itoa(TCNT1, buffer, 10); 
-        // itoa(distance, buffer, 10); 
-
-        // usart_tx_string(buffer); 
-        // usart_tx_string("in"); 
-       	// usart_tx('\r'); 
-        // usart_tx('\n'); 
+		*/
 
 
-		// Send string
-		USART_SendString(buffer);
-		USART_SendByte(100);
-        _delay_us(500000); 
+		// Send byte
+		send(6,6);
+		send(6,7);
+		send(6,8);
+		send(7,8);
+		send(7,7);
+		send(7,6);
+		send(8,6);
+		send(9,6);
+		send(9,7);
+		send(8,7);
+		send(8,8);
+		send(8,9);
+		send(9,9);
+		send(9,8);
+		send(10,8);
+		send(10,9);
+		send(11,9);
+		send(11,10);
+		send(11,11);
 
-    } 
-
+    //} 
 }
 
 void USART_Init(){
 	// Set baud rate (9600)
-	UBRRL = 0x67;
+	UBRRL = 0x33;
 	// Set frame format to 8 data bits, no parity, 2 stop bits
-	UCSRC = 0xA6;
+	UCSRC = 0x86;
 	// Enable receiver and transmitter
 	UCSRB = 0x08; 
 }
@@ -72,10 +83,20 @@ void USART_SendString(unsigned char *string){
 	}
 }
 
-void USART_SendByte(unsigned char c){
+void USART_SendByte(unsigned int c){
 	// Wait if a byte is being transmitted
 	while((UCSRA&(1<<UDRE) == 0));
 	// Transmit data
 	UDR = c;
 }
 
+void send(int x, int y){
+	USART_SendByte(101);
+	_delay_ms(10);
+	USART_SendByte(x);
+	_delay_ms(10);
+	USART_SendByte(102);
+	_delay_ms(10);
+	USART_SendByte(y);
+	_delay_ms(10);
+}
