@@ -74,7 +74,7 @@ void USART_SendString(unsigned char *string){
 
 void USART_SendByte(unsigned char c){
 	// Wait if a byte is being transmitted
-	while((UCSRA&(1<<UDRE)) == 0);
+	while((UCSRA&(1<<UDRE) == 0));
 	// Transmit data
 	UDR = c;
 }
