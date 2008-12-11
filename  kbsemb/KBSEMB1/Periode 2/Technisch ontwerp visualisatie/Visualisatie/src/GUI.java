@@ -16,10 +16,13 @@ public class GUI extends JFrame implements ActionListener {
 
     private JButton connectButton,startButton,stopButton,clearButton,closeButton,
                     aButton,bButton,cButton,dButton,eButton,fButton,button1,button2,button3,button4,button5,button6;
+    private JLabel sensor1,sensor2,sensor3,sensor4;
+    private JTextField sensorText1, sensorText2,sensorText3,sensorText4;
     private Panel p;
     private PaintPanel paintPanel;
-    private JTextArea console;
+    public JTextArea console;
     private JScrollPane scrollpane;
+    public Connection connection;
 
     public GUI() {
         //JFrame frame = new JFrame("Visualization Robot");
@@ -31,6 +34,7 @@ public class GUI extends JFrame implements ActionListener {
         p.setSize(190, 700);
         p.setLayout(null);
         connectButton = new JButton("Connect to Robot");
+        connectButton.addActionListener(this);
         startButton = new JButton("Start Visualization");
         stopButton = new JButton("Stop Visualization");
         clearButton = new JButton("Clear Visualization");
@@ -40,7 +44,7 @@ public class GUI extends JFrame implements ActionListener {
         startButton.setBounds(20, 60, 150, 30);
         stopButton.setBounds(20, 100, 150, 30);
         clearButton.setBounds(20, 140, 150, 30);
-        closeButton.setBounds(20, 450, 150, 30);
+        closeButton.setBounds(20, 580, 150, 30);
         closeButton.addActionListener(this);
         p.add(connectButton);
         p.add(startButton);
@@ -52,6 +56,30 @@ public class GUI extends JFrame implements ActionListener {
         scrollpane = new JScrollPane(console,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollpane.setBounds(20,190,150,240);
         p.add(scrollpane);
+        sensor1 = new JLabel("Sensor 1:");
+        sensor1.setBounds(20,450,75,30);
+        p.add(sensor1);
+        sensorText1 = new JTextField(20);
+        sensorText1.setBounds(90,455,75,20);
+        p.add(sensorText1);
+        sensor2 = new JLabel("Sensor 2:");
+        sensor2.setBounds(20,470,75,30);
+        p.add(sensor2);
+        sensorText2 = new JTextField(20);
+        sensorText2.setBounds(90,475,75,20);
+        p.add(sensorText2);
+        sensor3 = new JLabel("Sensor 3:");
+        sensor3.setBounds(20,490,75,30);
+        p.add(sensor3);
+        sensorText3 = new JTextField(20);
+        sensorText3.setBounds(90,495,75,20);
+        p.add(sensorText3);
+        sensor4 = new JLabel("Sensor 4:");
+        sensor4.setBounds(20,510,75,30);
+        p.add(sensor4);
+        sensorText4 = new JTextField(20);
+        sensorText4.setBounds(90,515,75,20);
+        p.add(sensorText4);
         aButton = new JButton("A");
         aButton.setBounds(695,30,100,30);
         aButton.addActionListener(this);
@@ -108,6 +136,8 @@ public class GUI extends JFrame implements ActionListener {
         pack();
         setSize(815, 655);
         setVisible(true);
+
+        connection = new Connection(this);
     }
 
     public static void main(String[] args) {
@@ -122,6 +152,9 @@ public class GUI extends JFrame implements ActionListener {
             if(response == 0){
                 System.exit(0);
             }
+        }
+        if(e.getSource() == connectButton){
+            connection.connect();
         }
         if (e.getSource() == aButton){
             paintPanel.setPosY(1);
