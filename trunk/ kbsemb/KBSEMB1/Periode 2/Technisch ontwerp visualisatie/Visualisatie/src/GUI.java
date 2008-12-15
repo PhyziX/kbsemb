@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class GUI extends JFrame implements ActionListener {
 
-    private JButton connectButton,startButton,stopButton,clearButton,closeButton,
+    private JButton startButton,stopButton,clearButton,closeButton,
                     aButton,bButton,cButton,dButton,eButton,fButton,button1,button2,button3,button4,button5,button6;
     private JLabel sensor1,sensor2,sensor3,sensor4;
     private JTextField sensorText1, sensorText2,sensorText3,sensorText4;
@@ -33,28 +33,28 @@ public class GUI extends JFrame implements ActionListener {
         p = new Panel();
         p.setSize(190, 700);
         p.setLayout(null);
-        connectButton = new JButton("Connect to Robot");
-        connectButton.addActionListener(this);
         startButton = new JButton("Start Visualization");
+        startButton.addActionListener(this);
         stopButton = new JButton("Stop Visualization");
+        stopButton.addActionListener(this);
+        stopButton.setEnabled(false);
         clearButton = new JButton("Clear Visualization");
         clearButton.addActionListener(this);
+        clearButton.setEnabled(false);
         closeButton = new JButton("Close Visualization");
-        connectButton.setBounds(20, 20, 150, 30);
-        startButton.setBounds(20, 60, 150, 30);
-        stopButton.setBounds(20, 100, 150, 30);
-        clearButton.setBounds(20, 140, 150, 30);
+        startButton.setBounds(20, 20, 150, 30);
+        stopButton.setBounds(20, 60, 150, 30);
+        clearButton.setBounds(20, 100, 150, 30);
         closeButton.setBounds(20, 580, 150, 30);
         closeButton.addActionListener(this);
-        p.add(connectButton);
         p.add(startButton);
         p.add(stopButton);
         p.add(clearButton);
         p.add(closeButton);
         console = new JTextArea(10,20);
-        console.append("Visualization started...");
+        console.append("Click Start Visualization...");
         scrollpane = new JScrollPane(console,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollpane.setBounds(20,190,150,240);
+        scrollpane.setBounds(20,150,150,240);
         p.add(scrollpane);
         sensor1 = new JLabel("Sensor 1:");
         sensor1.setBounds(20,450,75,30);
@@ -150,12 +150,34 @@ public class GUI extends JFrame implements ActionListener {
             response = JOptionPane.showConfirmDialog(null, "Do you really want to close this program?");
 
             if(response == 0){
+                if(connection!=null){
+                    if(connection.isConnected()){
+                        connection.closeConnection();
+                    }
+                }
                 System.exit(0);
             }
         }
-        if(e.getSource() == connectButton){
+        if(e.getSource() == startButton){
+            // Make connection
             connection.connect();
-            connectButton.setEnabled(false);
+            if(connection.isConnected()){
+                startButton.setEnabled(true);
+                stopButton.setEnabled(true);
+            }
+        }
+        if(e.getSource() == stopButton){
+            // Stop visualization
+            connection.closeConnection();
+            startButton.setEnabled(true);
+            stopButton.setEnabled(false);
+            clearButton.setEnabled(true);
+        }
+        if(e.getSource() == clearButton){
+            clearButton.setEnabled(false);
+            paintPanel.emptyList();
+            console.setText("Visualization started...");
+            console.setCaretPosition(console.getText().length() - 1);
         }
         if (e.getSource() == aButton){
             paintPanel.setPosY(1);
@@ -228,11 +250,6 @@ public class GUI extends JFrame implements ActionListener {
             console.append("\nNew X Start Position: 6");
             console.setCaretPosition(console.getText().length() - 1);
             paintPanel.repaint();
-        }
-        if(e.getSource() == clearButton){
-            paintPanel.emptyList();
-            console.setText("Visualization started...");
-            console.setCaretPosition(console.getText().length() - 1);
         }
     }
 }

@@ -19,24 +19,6 @@ public class PaintPanel extends JPanel {
 
     public PaintPanel(){
         moveList = new ArrayList<int[]>();
-        makeMove(6,5);
-        makeMove(6,4);
-        makeMove(5,4);
-        makeMove(5,3);
-        makeMove(4,3);
-        makeMove(4,4);
-        makeMove(3,4);
-        makeMove(3,3);
-        makeMove(3,2);
-        makeMove(4,2);
-        makeMove(4,1);
-        makeMove(3,1);
-        makeMove(2,1);
-        makeMove(2,2);
-        makeMove(2,3);
-        makeMove(1,3);
-        makeMove(1,2);
-        
         setSize(500, 500);
     }
 
