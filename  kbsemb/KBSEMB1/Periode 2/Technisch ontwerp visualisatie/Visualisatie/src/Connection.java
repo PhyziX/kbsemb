@@ -7,7 +7,7 @@ public class Connection implements Runnable, SerialPortEventListener
     // Initialize variables
     static int START_X = 6, START_Y = 6, INITIALIZE_ROBOT = 100, NEXT_X = 101, NEXT_Y = 102;
     String drivername = "com.sun.comm.Win32Driver",
-            defaultPort = "COM1", appName = "comm", next = "";
+            defaultPort = "COM6", appName = "comm", next = "";
     Enumeration portlist;
     CommPortIdentifier cpi = null;
     SerialPort port;
@@ -16,6 +16,7 @@ public class Connection implements Runnable, SerialPortEventListener
     Thread readThread;
     BufferedReader read;
     GUI gui;
+    boolean connected;
 
     // Constructor
     public Connection(GUI gui)
@@ -25,61 +26,47 @@ public class Connection implements Runnable, SerialPortEventListener
 
     public void serialEvent(SerialPortEvent spEvent)
     {
-       try{
-            // Listen to port, and print incoming data
-            int eventType = spEvent.getEventType();
-            if(eventType == SerialPortEvent.DATA_AVAILABLE)
-            {
-                try{
-                    data = input.read();
-                    // Initializion number
-                    if(data == INITIALIZE_ROBOT){
-                        modX = START_X - gui.paintPanel.posX;
-                        modY = START_Y - gui.paintPanel.posY;
-                        gui.console.append("\nRobot initialized");
-                    }
-                    if(next.equals("x")){
-                        nextX = data - modX;
-                        next = "";
-                    }
-                    if(next.equals("y")){
-                        nextY = data - modY;
-                        next = "";
-                        gui.paintPanel.makeMove(nextX, nextY);
-                    }
-                    if(data == NEXT_X){
-                        next = "x";
-                        gui.console.append("\nx");
-                    }
-                    if(data == NEXT_Y){
-                        next = "y";
-                        gui.console.append("\ny");
-                    }
+        int eventType = spEvent.getEventType();
+        if(eventType == SerialPortEvent.DATA_AVAILABLE)
+        {
+            try{
+                data = input.read();
+                // Initializion number
+                if(data == INITIALIZE_ROBOT){
+                    modX = START_X - gui.paintPanel.posX;
+                    modY = START_Y - gui.paintPanel.posY;
+                    gui.console.append("\nRobot initialized");
                 }
-                catch(IOException ioe){
-                    System.out.println(ioe.getMessage());
+                if(next.equals("x")){
+                    nextX = data - modX;
+                    next = "";
+                }
+                if(next.equals("y")){
+                    nextY = data - modY;
+                    next = "";
+                    gui.paintPanel.makeMove(nextX, nextY);
                 }
             }
-       }
-       catch(Exception e){
-           //
-       }
+            catch(IOException ioe){
+                gui.console.append("\nI/O Exception");
+            }
+        }
     }
 
-    public boolean connect(){
+    public void connect(){
                 // Initialize driver
         try{
             CommDriver driver = (CommDriver) Class.forName(drivername).newInstance();
             driver.initialize();
         }
         catch(IllegalAccessException iae){
-            System.out.println(iae.getMessage());
+            gui.console.append("\nIllegal access exception while loading driver");
         }
         catch(InstantiationException ie){
-            System.out.println(ie.getMessage());
+            gui.console.append("\nInstantiation exception while loading driver");
         }
         catch(ClassNotFoundException cnfe){
-            System.out.println(cnfe.getMessage());
+            gui.console.append("\nDriver class not found");
         }
 
         // Get list of available ports
@@ -97,7 +84,7 @@ public class Connection implements Runnable, SerialPortEventListener
             port = (SerialPort) cpi.open(appName, 2000);
         }
         catch(PortInUseException piue){
-            System.out.println(piue.getMessage());
+            gui.console.append("\nPort currently in use");
         }
 
         // Make an inputStream for the port
@@ -105,7 +92,7 @@ public class Connection implements Runnable, SerialPortEventListener
             input = port.getInputStream();
         }
         catch(IOException ioe){
-            System.out.println(ioe.getMessage());
+            gui.console.append("\nI/O exception while creating inputstream");
         }
 
         // Add evenlistener to port, to start listening to incoming data
@@ -114,7 +101,7 @@ public class Connection implements Runnable, SerialPortEventListener
             //read = new BufferedReader(input);
         }
         catch(TooManyListenersException tmle){
-            System.out.println(tmle.getMessage());
+            gui.console.append("\nToo many listeners on port");
         }
 
         // Set notify interrupt, in case incoming data is available
@@ -124,21 +111,41 @@ public class Connection implements Runnable, SerialPortEventListener
                     SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
         }
         catch(UnsupportedCommOperationException ucoe){
-            System.out.println(ucoe.getMessage());
+            gui.console.append("\nUnsupported comm operation error while setting port settings");
         }
 
         // Notfiy sender that application is ready to receive data
         port.setDTR(true);
-        System.out.println("Aangesloten");
 
         // Start thread to listen to port
         readThread = new Thread(this);
         readThread.start();
 
-        gui.console.append("\nConnection Succesful");
-        return true;
+        gui.console.append("\nConnection succesful");
+        connected = true;
     }
-
+    
+    public void closeConnection(){
+        try {
+            // Close inputstream
+            input.close();
+        } catch (IOException ex) {
+            gui.console.append("\nInputstream close failed");
+        }
+        // Close port
+        port.close();
+        gui.console.append("\nConnection closed");
+        
+    }
+    
+    public boolean isConnected(){
+        if(connected == true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public void run()
     {
         
