@@ -11,6 +11,7 @@
 void USART_Init();				
 void USART_SendString(unsigned char *);
 void USART_SendByte(unsigned char );
+void send(int,int);
 
 void USART_Init(){
 	UBRRL = 0x33;	// Set baud rate (9600) for 8Mhz (ATMega16 datasheet) 
@@ -27,4 +28,15 @@ void USART_SendString(unsigned char *string){
 void USART_SendByte(unsigned char c){	
 	while((UCSRA&(1<<UDRE)) == 0); // Wait if a byte is being transmitted
 	UDR = c;	// Transmit data
+}
+
+void send(int x, int y){
+	USART_SendByte(101);
+	_delay_ms(30);
+	USART_SendByte(x);
+	_delay_ms(30);
+	USART_SendByte(102);
+	_delay_ms(30);
+	USART_SendByte(y);
+	_delay_ms(30);
 }

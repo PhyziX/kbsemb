@@ -7,7 +7,7 @@ public class Connection implements Runnable, SerialPortEventListener
     // Initialize variables
     static int START_X = 6, START_Y = 6, INITIALIZE_ROBOT = 100, NEXT_X = 101, NEXT_Y = 102;
     String drivername = "com.sun.comm.Win32Driver",
-            defaultPort = "COM6", appName = "comm", next = "";
+            defaultPort = "COM7", appName = "comm", next = "";
     Enumeration portlist;
     CommPortIdentifier cpi = null;
     SerialPort port;
@@ -32,6 +32,7 @@ public class Connection implements Runnable, SerialPortEventListener
             try{
                 data = input.read();
                 // Initializion number
+                gui.console.append("\n"+data);
                 if(data == INITIALIZE_ROBOT){
                     modX = START_X - gui.paintPanel.posX;
                     modY = START_Y - gui.paintPanel.posY;
@@ -45,6 +46,13 @@ public class Connection implements Runnable, SerialPortEventListener
                     nextY = data - modY;
                     next = "";
                     gui.paintPanel.makeMove(nextX, nextY);
+                    gui.console.append("\nJa! Y");
+                }
+                if(data == NEXT_X){
+                    next = "x";
+                }
+                else if(data == NEXT_Y){
+                    next = "y";
                 }
             }
             catch(IOException ioe){
